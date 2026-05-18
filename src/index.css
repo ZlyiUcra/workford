@@ -82,10 +82,10 @@ header a:hover {
   transition: 0.3s;
 }
 .icon.telegram {
-  content: url("/src/assets/telegram.svg");
+  content: url("/src/assets/icons/telegram.svg");
 }
 .icon.instagram {
-  content: url("/src/assets/instagram.svg");
+  content: url("/src/assets/icons/instagram.svg");
 }
 .icon:hover {
   background: #4824ff;
@@ -112,7 +112,7 @@ header a:hover {
   width: 51px;
 }
 .theme.light {
-  content: url("/src/assets/sun.svg");
+  content: url("/src/assets/icons/sun.svg");
 }
 .switch:hover > .theme.light {
   transform: rotate(45deg);
@@ -329,4 +329,176 @@ header a:hover {
   background: #04001a;
   color: white;
   border: 1px solid #4824ff;
+}
+
+/* ---- REVIEW BLOCK ---- */
+.review-block {
+  margin: 80px 0px;
+  height: 580px;
+  background: #4824ff;
+  border-radius: 28px;
+}
+
+.review-block h1 {
+  color: white;
+  text-align: center;
+  padding-top: 36px;
+  font-size: 50px;
+}
+
+.review-block .description {
+  color: white;
+  text-align: center;
+  margin-top: -12px;
+  font-size: 22px;
+  line-height: 32px;
+}
+
+.review-block .selecting {
+  background: white;
+  color: black;
+  margin: 0px 8px;
+  font-weight: 500;
+}
+
+.review-carousel {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 1260px;
+}
+
+.review-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+.next-button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  transition: 0.7s;
+  align-content: center;
+  margin: 16px 0 0 10px;
+}
+
+.next-button .array-next-icon {
+  content: url(/src/assets/icons/array-next.svg);
+  scale: 0.7;
+  height: 50px;
+  //padding: 15px;
+  margin: 3px;
+}
+
+.next-button:hover {
+  background: #00000050;
+}
+
+.next-button:hover .array-next-icon {
+  filter: invert(100%);
+}
+
+.review-card {
+  min-width: 420px;
+}
+
+.review-content {
+  height: 230px;
+  width: 384px;
+  background: white;
+  border-radius: 24px;
+  margin: 0 18px;
+}
+
+.review-block .review {
+  margin-top: auto;
+  font-size: 19px;
+  line-height: 27px;
+  width: 90%;
+}
+
+.review-block .link {
+  display: flex;
+  position: right;
+  height: 40px;
+  width: 80px;
+  background: black;
+  border-radius: 24px;
+  cursor: pointer;
+  border: 2px solid black;
+  transition: 0.5s ease-in-out;
+}
+
+.review-block .link:hover {
+  border: 2px double #4824ff;
+  filter: drop-shadow(0px 0px 25px #4824ff90);
+}
+
+.review-block .telegram-icon {
+  margin: -7px -4px;
+  padding: 0;
+  position: relative;
+  content: url(/src/assets/icons/telegram-blue.svg);
+  background: none;
+  scale: 0.84;
+  height: 50px;
+}
+
+.review-block .array-corner-icon {
+  margin: -6px -18px;
+  padding: 0;
+  position: relative;
+  content: url(/src/assets/icons/array-corner.svg);
+  background: none;
+  scale: 0.37;
+  height: 50px;
+}
+
+/* ---- GUARANTEES BLOCK ---- */
+
+.guarantees-block {
+  height: 540px;
+  font-size: 26px;
+}
+
+.guarantees-points {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.guarantees-points li {
+  position: relative;
+  padding-left: 60px;
+}
+
+.guarantees-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: translateY(-10%);
+  width: 40px;
+  height: 40px;
+  background-image: url(/src/assets/icons/mark.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: -20px;
+}
+.point {
+  margin-top: 35px;
+}
+
+/* ---- FOOTER BLOCK ---- */
+
+.footer {
+  height: 80px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #cec4fe50;
+  margin-left: -5vw;
+  margin-right: -5vw;
+  align-content: center;
 }
