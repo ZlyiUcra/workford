@@ -321,7 +321,7 @@ function Main() {
       </div>
 
       <div className="review-block">
-        <h1>REVIEWS</h1>
+        <h1>Feedback</h1>
         <p className="description">
           Client reviews, written from their own
           <span className="selecting"> personal accounts </span>

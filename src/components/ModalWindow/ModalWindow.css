@@ -91,11 +91,11 @@
 }
 
 .social.telegram {
-  content: url(/src/assets/telegram.svg);
+  content: url(/src/assets/icons/telegram.svg);
 }
 
 .social.instagram {
-  content: url(/src/assets/instagram.svg);
+  content: url(/src/assets/icons/instagram.svg);
 }
 
 .social-button:hover {
