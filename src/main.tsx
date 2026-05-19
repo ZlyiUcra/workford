@@ -10,6 +10,8 @@ import {
   YouTubeDesign,
 } from "./components";
 
+import { useTheme } from "./hooks";
+
 const CATEGORY_COMPONENTS = {
   AllGallery,
   Banners,
@@ -49,6 +51,28 @@ const reviews = [
 ];
 
 function Main() {
+  const { theme, setTheme } = useTheme();
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark";
+  });
+  const toggleTheme = () => {
+    if (isDarkTheme) {
+      lightTheme();
+    } else {
+      darkTheme();
+    }
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  const lightTheme = () => {
+    setTheme("light");
+  };
+
+  const darkTheme = () => {
+    setTheme("dark");
+  };
+
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<Category>("AllGallery");
@@ -136,26 +160,34 @@ function Main() {
           <div className="menu">
             <a onClick={upButton}>About us</a>
             <a
-              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
-              height="700"
+              onClick={(e) =>
+                toBlock(Number(e.currentTarget.getAttribute("data-height")))
+              }
+              data-height="700"
             >
               Services
             </a>
             <a
-              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
-              height="1230"
+              onClick={(e) =>
+                toBlock(Number(e.currentTarget.getAttribute("data-height")))
+              }
+              data-height="1230"
             >
               Portfolio
             </a>
             <a
-              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
-              height="1920"
+              onClick={(e) =>
+                toBlock(Number(e.currentTarget.getAttribute("data-height")))
+              }
+              data-height="1920"
             >
               Feedback
             </a>
             <a
-              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
-              height="2600"
+              onClick={(e) =>
+                toBlock(Number(e.currentTarget.getAttribute("data-height")))
+              }
+              data-height="2600"
             >
               Guarantees
             </a>
@@ -166,11 +198,30 @@ function Main() {
               Contact us
             </button>
 
-            <a target="_blank" href="" className="icon telegram" />
-            <a target="_blank" href="" className="icon instagram" />
+            <a
+              target="_blank"
+              href=""
+              className={
+                theme === "light" ? "icon telegram light" : "icon telegram dark"
+              }
+            />
+            <a
+              target="_blank"
+              href=""
+              className={
+                theme === "light"
+                  ? "icon instagram light"
+                  : "icon instagram dark"
+              }
+            />
 
-            <div className="switch">
-              <div className="theme light"></div>
+            <div className="switch" onClick={toggleTheme}>
+              <div
+                className={theme === "light" ? "theme light" : "theme dark"}
+                style={{
+                  transform: isDarkTheme ? "translateX(38px)" : "translateX(0)",
+                }}
+              ></div>
             </div>
           </div>
         </div>
@@ -213,7 +264,7 @@ function Main() {
           />
           <img
             className="third-image-layer"
-            src="./images/3.png"
+            src={theme === "light" ? "./images/3.png" : "./images/3-dark.png"}
             draggable="false"
           />
           <img
@@ -239,27 +290,63 @@ function Main() {
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex", flexWrap: "wrap", marginTop: "16px" }}>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               Advertising banners
             </div>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               YouTube video thumbnails
             </div>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               YouTube channel design
             </div>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               Infographics
             </div>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               Instagram design
             </div>
             <div className="tag">
-              <span className="tag-icon" />
+              <span
+                className={
+                  theme === "light"
+                    ? "tag-icon icon-dark"
+                    : "tag-icon icon-light"
+                }
+              />
               Facebook design
             </div>
           </div>
