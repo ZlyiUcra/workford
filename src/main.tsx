@@ -111,33 +111,77 @@ function Main() {
     };
   }, []);
 
+  const [scroll, setScroll] = useState(0);
+
+  const scrollUp = () => {
+    setScroll(window.scrollY);
+  };
+
+  const upButton = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollUp);
+  }, []);
+
+  const toBlock = (height: number) => {
+    window.scrollTo({ top: height, left: 0, behavior: "smooth" });
+  };
+
   return (
     <div>
       <header>
-        <div className="menu">
-          <a>About us</a>
-          <a>Services</a>
-          <a>Portfolio</a>
-          <a>Feedback</a>
-          <a>Warranties</a>
-        </div>
-        <button onClick={handleOpenModal} className="btn">
-          Contact us
-        </button>
-        <ModalWindow show={showModal} onClose={handleCloseModal}>
-          <h2 style={{ color: "#4824ff", fontSize: "40px" }}>Contacts</h2>
-          <p style={{ fontSize: "22px" }}>
-            You can contact us via Telergam <br />
-            or Instagram👇
-          </p>
-        </ModalWindow>
-        <a target="_blank" href="" className="icon telegram" />
-        <a target="_blank" href="" className="icon instagram" />
+        <div className="navigation">
+          <div className="menu">
+            <a onClick={upButton}>About us</a>
+            <a
+              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
+              height="700"
+            >
+              Services
+            </a>
+            <a
+              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
+              height="1230"
+            >
+              Portfolio
+            </a>
+            <a
+              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
+              height="1920"
+            >
+              Feedback
+            </a>
+            <a
+              onClick={(e) => toBlock(Number(e.target.getAttribute("height")))}
+              height="2600"
+            >
+              Guarantees
+            </a>
+          </div>
 
-        <div className="switch">
-          <div className="theme light"></div>
+          <div className="header-buttons">
+            <button onClick={handleOpenModal} className="btn">
+              Contact us
+            </button>
+
+            <a target="_blank" href="" className="icon telegram" />
+            <a target="_blank" href="" className="icon instagram" />
+
+            <div className="switch">
+              <div className="theme light"></div>
+            </div>
+          </div>
         </div>
       </header>
+      <ModalWindow show={showModal} onClose={handleCloseModal}>
+        <h2 style={{ color: "#4824ff", fontSize: "40px" }}>Contacts</h2>
+        <p style={{ fontSize: "22px" }}>
+          You can contact us via Telergam <br />
+          or Instagram👇
+        </p>
+      </ModalWindow>
 
       <div className="welcome-block">
         <div className="first-block">
@@ -339,6 +383,10 @@ function Main() {
         </ol>
       </div>
       <div className="footer"> Workford </div>
+      <button
+        className={scroll < 1960 ? "" : "btn-up"}
+        onClick={upButton}
+      ></button>
     </div>
   );
 }
