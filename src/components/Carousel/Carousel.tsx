@@ -11,9 +11,11 @@ const images = Object.values(
 
 const Carousel = ({ direction }: { direction: "left" | "right" }) => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const requestIdRef = useRef<number | null>(null);
-  const startPositionref = useRef(0);
+  const startPositionRef = useRef(0);
+
+  //const [isHovered, setIsHovered] = useState(false);
+  const isHoveredRef = useRef(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const isPortrait = useResize();
@@ -23,40 +25,42 @@ const Carousel = ({ direction }: { direction: "left" | "right" }) => {
   };
   useEffect(() => {
     const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const speed = direction === "left" ? -0.3 : 0.3;
+
     const animate = () => {
-      if (!carousel) return;
-      if (!isHovered) {
-        startPositionref.current += direction === "left" ? -0.3 : 0.3;
-        if (startPositionref.current >= carousel.scrollWidth / 2) {
-          startPositionref.current = 0;
-        } else if (startPositionref.current <= 0) {
-          startPositionref.current = carousel.scrollWidth / 2;
+      if (!isHoveredRef.current) {
+        startPositionRef.current += speed;
+
+        if (startPositionRef.current >= carousel.scrollWidth / 2) {
+          startPositionRef.current = 0;
+        } else if (startPositionRef.current <= 0) {
+          startPositionRef.current = carousel.scrollWidth / 2;
         }
-        carousel.scrollLeft = startPositionref.current;
+
+        carousel.scrollLeft = startPositionRef.current;
       }
-      if (requestIdRef.current !== null) {
-        cancelAnimationFrame(requestIdRef.current);
-      }
+
       requestIdRef.current = requestAnimationFrame(animate);
     };
-    if (requestIdRef.current !== null) {
-      cancelAnimationFrame(requestIdRef.current);
-    }
+
     requestIdRef.current = requestAnimationFrame(animate);
+
     return () => {
-      if (requestIdRef.current !== null) {
+      if (requestIdRef.current) {
         cancelAnimationFrame(requestIdRef.current);
       }
     };
-  }, [isHovered, direction]);
+  }, [direction]); // 👈 SOLO depende de direction
 
   return (
     <>
       <div
         className="carousel-container"
         ref={carouselRef}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => (isHoveredRef.current = true)}
+        onMouseLeave={() => (isHoveredRef.current = false)}
       >
         <div className="carousel-content">
           {images.map((image, index) => (
