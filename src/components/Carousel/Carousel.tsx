@@ -16,7 +16,7 @@ const Carousel = ({ direction }: { direction: "left" | "right" }) => {
   const startPositionref = useRef(0);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const { isPortrait } = useResize();
+  const isPortrait = useResize();
 
   const closeModal = () => {
     setSelectedImage(null);

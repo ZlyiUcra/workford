@@ -666,7 +666,7 @@ header a:hover {
   content: url(/src/assets/icons/array-next.svg);
   scale: 0.7;
   height: 50px;
-  //padding: 15px;
+  /* padding: 15px; */
   margin: 3px;
 }
 
