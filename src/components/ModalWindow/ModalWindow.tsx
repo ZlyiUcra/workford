@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import type { ReactNode } from "react";
+import { useResize } from "../../hooks";
 import "./ModalWindow.css";
 
 interface ModalWindowProps {
@@ -9,6 +10,7 @@ interface ModalWindowProps {
 }
 
 const ModalWindow = ({ show, onClose, children }: ModalWindowProps) => {
+  const isPortrait = useResize();
   const [isVisible, setIsVisible] = useState(false);
 
   const handleKeyDown = useCallback(
@@ -38,27 +40,31 @@ const ModalWindow = ({ show, onClose, children }: ModalWindowProps) => {
       style={{ display: isVisible ? "flex" : "none" }}
       onClick={onClose}
     >
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button
-          onClick={onClose}
-          className="modal-close-button"
-          aria-label="Close modal"
-        ></button>
-        {children}
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
-          <a target="_blank" href="" className="social-button">
-            <div className="social telegram" />
-            Telegram
-          </a>
+      <div style={{ scale: isPortrait ? 1 : 0.5 }}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={onClose}
+            className="modal-close-button"
+            aria-label="Close modal"
+          ></button>
+          {children}
+          <div
+            style={{
+              display: "flex",
+              scale: isPortrait ? 1 : 1.12,
+              marginLeft: isPortrait ? "" : "8vw",
+            }}
+          >
+            <a target="_blank" href="" className="social-button">
+              <div className="social telegram" />
+              Telegram
+            </a>
 
-          <a target="_blank" href="" className="social-button">
-            <div className="social instagram" />
-            Instagram
-          </a>
+            <a target="_blank" href="" className="social-button">
+              <div className="social instagram" />
+              Instagram
+            </a>
+          </div>
         </div>
       </div>
     </div>

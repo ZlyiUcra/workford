@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import {
   ModalWindow,
+  ModalMenu,
   AllGallery,
   Banners,
   InstagramStories,
@@ -10,7 +11,7 @@ import {
   YouTubeDesign,
 } from "./components";
 
-import { useTheme } from "./hooks";
+import { useTheme, useResize } from "./hooks";
 
 const CATEGORY_COMPONENTS = {
   AllGallery,
@@ -51,6 +52,8 @@ const reviews = [
 ];
 
 function Main() {
+  const isPortrait = useResize();
+
   const { theme, setTheme } = useTheme();
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -74,6 +77,7 @@ function Main() {
   };
 
   const [showModal, setShowModal] = useState(false);
+  const [showModalMenu, setShowModalMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<Category>("AllGallery");
 
@@ -84,6 +88,13 @@ function Main() {
   };
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleOpenModalMenu = () => {
+    setShowModalMenu(true);
+  };
+  const handleCloseModalMenu = () => {
+    setShowModalMenu(false);
   };
 
   const containerReviewRef = useRef<HTMLDivElement>(null);
@@ -156,203 +167,352 @@ function Main() {
   return (
     <div>
       <header>
-        <div className="navigation">
-          <div className="menu">
-            <a onClick={upButton}>About us</a>
-            <a
-              onClick={(e) =>
-                toBlock(Number(e.currentTarget.getAttribute("data-height")))
-              }
-              data-height="700"
-            >
-              Services
-            </a>
-            <a
-              onClick={(e) =>
-                toBlock(Number(e.currentTarget.getAttribute("data-height")))
-              }
-              data-height="1230"
-            >
-              Portfolio
-            </a>
-            <a
-              onClick={(e) =>
-                toBlock(Number(e.currentTarget.getAttribute("data-height")))
-              }
-              data-height="1920"
-            >
-              Feedback
-            </a>
-            <a
-              onClick={(e) =>
-                toBlock(Number(e.currentTarget.getAttribute("data-height")))
-              }
-              data-height="2600"
-            >
-              Guarantees
-            </a>
+        {isPortrait ? (
+          <div className="navigation">
+            <div className="menu">
+              <a onClick={upButton}>About us</a>
+              <a
+                onClick={(e) =>
+                  toBlock(Number(e.currentTarget.getAttribute("data-height")))
+                }
+                data-height="700"
+              >
+                Services
+              </a>
+              <a
+                onClick={(e) =>
+                  toBlock(Number(e.currentTarget.getAttribute("data-height")))
+                }
+                data-height="1230"
+              >
+                Portfolio
+              </a>
+              <a
+                onClick={(e) =>
+                  toBlock(Number(e.currentTarget.getAttribute("data-height")))
+                }
+                data-height="1920"
+              >
+                Feedback
+              </a>
+              <a
+                onClick={(e) =>
+                  toBlock(Number(e.currentTarget.getAttribute("data-height")))
+                }
+                data-height="2600"
+              >
+                Guarantees
+              </a>
+            </div>
+
+            <div className="header-buttons">
+              <button onClick={handleOpenModal} className="btn">
+                Contact us
+              </button>
+
+              <a
+                target="_blank"
+                href=""
+                className={
+                  theme === "light"
+                    ? "icon telegram light"
+                    : "icon telegram dark"
+                }
+              />
+              <a
+                target="_blank"
+                href=""
+                className={
+                  theme === "light"
+                    ? "icon instagram light"
+                    : "icon instagram dark"
+                }
+              />
+
+              <div className="switch" onClick={toggleTheme}>
+                <div
+                  className={theme === "light" ? "theme light" : "theme dark"}
+                  style={{
+                    transform: isDarkTheme
+                      ? "translateX(38px)"
+                      : "translateX(0)",
+                  }}
+                ></div>
+              </div>
+            </div>
           </div>
-
-          <div className="header-buttons">
-            <button onClick={handleOpenModal} className="btn">
-              Contact us
-            </button>
-
-            <a
-              target="_blank"
-              href=""
-              className={
-                theme === "light" ? "icon telegram light" : "icon telegram dark"
-              }
-            />
-            <a
-              target="_blank"
-              href=""
-              className={
-                theme === "light"
-                  ? "icon instagram light"
-                  : "icon instagram dark"
-              }
-            />
-
-            <div className="switch" onClick={toggleTheme}>
+        ) : (
+          <div className="navigation">
+            <div className="switch switch-mobile" onClick={toggleTheme}>
               <div
-                className={theme === "light" ? "theme light" : "theme dark"}
+                className={
+                  theme === "light"
+                    ? "theme theme-mobile light"
+                    : "theme theme-mobile dark"
+                }
                 style={{
-                  transform: isDarkTheme ? "translateX(38px)" : "translateX(0)",
+                  transform: isDarkTheme
+                    ? "translateX(8.6vw)"
+                    : "translateX(0)",
                 }}
               ></div>
             </div>
+            <div className="header-buttons-mobile">
+              <a
+                target="_blank"
+                href=""
+                className={
+                  theme === "light"
+                    ? "icon icon-mobile telegram light"
+                    : "icon icon-mobile telegram dark"
+                }
+              />
+              <a
+                target="_blank"
+                href=""
+                className={
+                  theme === "light"
+                    ? "icon icon-mobile instagram light"
+                    : "icon icon-mobile instagram dark"
+                }
+              />
+              <a
+                onClick={handleOpenModalMenu}
+                className={
+                  theme === "light" ? "icon-menu light" : "icon-menu dark"
+                }
+              />
+            </div>
           </div>
-        </div>
+        )}
       </header>
+      <ModalMenu show={showModalMenu} onClose={handleCloseModalMenu}>
+        <a onClick={upButton}>About us</a>
+        <a
+          onClick={(e) =>
+            toBlock(Number(e.currentTarget.getAttribute("data-height")))
+          }
+          data-height="700"
+        >
+          Services
+        </a>
+        <a
+          onClick={(e) =>
+            toBlock(Number(e.currentTarget.getAttribute("data-height")))
+          }
+          data-height="1230"
+        >
+          Portfolio
+        </a>
+        <a
+          onClick={(e) =>
+            toBlock(Number(e.currentTarget.getAttribute("data-height")))
+          }
+          data-height="1920"
+        >
+          Feedback
+        </a>
+        <a
+          onClick={(e) =>
+            toBlock(Number(e.currentTarget.getAttribute("data-height")))
+          }
+          data-height="2600"
+        >
+          Guarantees
+        </a>
+      </ModalMenu>
       <ModalWindow show={showModal} onClose={handleCloseModal}>
-        <h2 style={{ color: "#4824ff", fontSize: "40px" }}>Contacts</h2>
-        <p style={{ fontSize: "22px" }}>
-          You can contact us via Telergam <br />
-          or Instagram👇
-        </p>
+        <h2
+          style={{
+            color: "#4824ff",
+            fontSize: isPortrait ? "40px" : "15vw",
+            marginTop: isPortrait ? "" : "0",
+          }}
+        >
+          Contacts
+        </h2>
+        {isPortrait ? (
+          <p style={{ fontSize: "22px" }}>
+            You can contact us via Telergam <br />
+            or Instagram👇
+          </p>
+        ) : (
+          <p style={{ fontSize: "33px" }}>
+            You can contact us via Telergam or Instagram👇
+          </p>
+        )}
       </ModalWindow>
 
-      <div className="welcome-block">
-        <div className="first-block">
-          <h1>
-            Web designer <span className="title">Workford</span>
-          </h1>
-          <h2 style={{ marginBottom: "7%", marginTop: "7%" }}>
-            I create <span style={{ color: "#4824ff" }}>marketable</span>
-            <br />
-            and <span style={{ color: "#4824ff" }}>unique </span>
-            design <br /> tailored to your needs
-          </h2>
-          <h3>
-            I've been doing web design
-            <br />
-            for <span style={{ color: "#4824ff" }}> 9 years</span>
-          </h3>
+      {isPortrait ? (
+        <div className="welcome-block">
+          <div className="first-block">
+            <h1>
+              Web designer <span className="title">Workford</span>
+            </h1>
+            <h2 style={{ marginBottom: "7%", marginTop: "7%" }}>
+              I create <span style={{ color: "#4824ff" }}>marketable</span>
+              <br />
+              and <span style={{ color: "#4824ff" }}>unique </span>
+              design <br /> tailored to your needs
+            </h2>
+            <h3>
+              I've been doing web design
+              <br />
+              for <span style={{ color: "#4824ff" }}> 9 years</span>
+            </h3>
+          </div>
+          <div className="main-image-box">
+            <img
+              className="first-image-layer"
+              src="./images/1.png"
+              draggable="false"
+            />
+            <img
+              className="second-image-layer"
+              src="./images/2.png"
+              draggable="false"
+            />
+            <img
+              className="third-image-layer"
+              src={theme === "light" ? "./images/3.png" : "./images/3-dark.png"}
+              draggable="false"
+            />
+            <img
+              className="fourth-image-layer"
+              src="./images/4.png"
+              draggable="false"
+            />
+            <img
+              className="fifth-image-layer"
+              src="./images/5.png"
+              draggable="false"
+            />
+          </div>
         </div>
-        <div className="main-image-box">
-          <img
-            className="first-image-layer"
-            src="./images/1.png"
-            draggable="false"
-          />
-          <img
-            className="second-image-layer"
-            src="./images/2.png"
-            draggable="false"
-          />
-          <img
-            className="third-image-layer"
-            src={theme === "light" ? "./images/3.png" : "./images/3-dark.png"}
-            draggable="false"
-          />
-          <img
-            className="fourth-image-layer"
-            src="./images/4.png"
-            draggable="false"
-          />
-          <img
-            className="fifth-image-layer"
-            src="./images/5.png"
-            draggable="false"
-          />
+      ) : (
+        <div className="welcome-block mobile">
+          <div className="main-image-box mobile">
+            <img
+              className="first-image-layer mobile"
+              src="./images/1.png"
+              draggable="false"
+            />
+            <img
+              className="second-image-layer mobile"
+              src="./images/2.png"
+              draggable="false"
+            />
+            <img
+              className="third-image-layer mobile"
+              src={theme === "light" ? "./images/3.png" : "./images/3-dark.png"}
+              draggable="false"
+            />
+            <img
+              className="fourth-image-layer mobile"
+              src="./images/4.png"
+              draggable="false"
+            />
+            <img
+              className="fifth-image-layer mobile"
+              src="./images/5.png"
+              draggable="false"
+            />
+          </div>
+          <div className="first-block mobile">
+            <h1>
+              Web designer <span className="title ">Workford</span>
+            </h1>
+            <h2 style={{ marginBottom: "7%", marginTop: "7%" }}>
+              I create <span style={{ color: "#4824ff" }}>marketable</span>
+              <br />
+              and <span style={{ color: "#4824ff" }}>unique </span>
+              design <br /> tailored to your needs
+            </h2>
+            <h3>
+              I've been doing web design
+              <br />
+              for <span style={{ color: "#4824ff" }}> 9 years</span>
+            </h3>
+          </div>
+          <button onClick={handleOpenModal} className="btn mobile">
+            Contact us
+          </button>
         </div>
-      </div>
+      )}
 
-      <div className="service-block" draggable={false}>
-        <h1 style={{ fontSize: "52px" }}>SERVICES</h1>
-        <p style={{ fontSize: "27px" }}>
+      <div
+        className={isPortrait ? "service-block" : "service-block mobile"}
+        draggable={false}
+      >
+        <h1 style={{ fontSize: isPortrait ? "52px" : "10vw" }}>SERVICES</h1>
+        <p style={{ fontSize: isPortrait ? "27px" : "6vw" }}>
           I create <span style={{ color: "#4824ff" }}> static design </span> in
           the following areas:
         </p>
 
-        <div style={{ display: "flex" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", marginTop: "16px" }}>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              Advertising banners
-            </div>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              YouTube video thumbnails
-            </div>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              YouTube channel design
-            </div>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              Infographics
-            </div>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              Instagram design
-            </div>
-            <div className="tag">
-              <span
-                className={
-                  theme === "light"
-                    ? "tag-icon icon-dark"
-                    : "tag-icon icon-light"
-                }
-              />
-              Facebook design
-            </div>
+        <div
+          style={{
+            display: isPortrait ? "flex" : "",
+          }}
+        >
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            Advertising banners
+          </div>
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            YouTube video thumbnails
+          </div>
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            YouTube channel design
+          </div>
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            Infographics
+          </div>
+        </div>
+        <div
+          style={{
+            display: isPortrait ? "flex" : "",
+            marginTop: isPortrait ? "16px" : "",
+          }}
+        >
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            Instagram design
+          </div>
+          <div className={isPortrait ? "tag" : "tag mobile"}>
+            <span
+              className={`tag-icon ${
+                theme === "light" ? "tag-icon icon-dark" : "tag-icon icon-light"
+              } ${isPortrait ? "" : "mobile"}`}
+            />
+            Facebook design
           </div>
         </div>
 
-        <p style={{ fontSize: "27px" }}>
+        <p style={{ fontSize: isPortrait ? "27px" : "6vw" }}>
           Open to discussing design creation and other areas. <br />
           I'm ready to discuss the details in{" "}
           <span
