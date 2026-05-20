@@ -559,11 +559,7 @@ function Main() {
               folio
             </p>
           </div>
-          <img
-            className="array-icon"
-            src="src/assets/icons/array.svg"
-            draggable={false}
-          />
+          <div className="array-icon" draggable={false} />
         </div>
 
         <div className={isPortrait ? "" : "filter-scrollbar"}>

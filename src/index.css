@@ -491,7 +491,11 @@ header a:hover {
   margin: 0 20px;
   padding: 0;
   width: 75px;
+  height: 75px;
   filter: drop-shadow(20px 20px 15px #4824ff25);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url(/src/assets/icons/array.svg);
 }
 .portfolio-block .array-icon.mobile {
   width: 45px;
