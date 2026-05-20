@@ -469,6 +469,9 @@ header a:hover {
   justify-content: center;
   align-items: center;
 }
+.portfolio-block .first-bloc.mobile {
+  margin-top: 5vw;
+}
 
 .portfolio-block .main-title {
   font-size: 56px;
@@ -478,12 +481,21 @@ header a:hover {
   color: transparent;
   background-clip: text;
 }
+.portfolio-block .main-title.mobile {
+  font-size: 28px;
+  margin-left: 3vw;
+  z-index: 1;
+}
 
 .portfolio-block .array-icon {
   margin: 0 20px;
   padding: 0;
   width: 75px;
   filter: drop-shadow(20px 20px 15px #4824ff25);
+}
+.portfolio-block .array-icon.mobile {
+  width: 45px;
+  margin: 0 10px 4px 8px;
 }
 
 .portfolio-block .title-border {
@@ -498,6 +510,9 @@ header a:hover {
     -1px 1px 0 var(--main-text-color),
     1px 1px 0 var(--main-text-color);
 }
+.portfolio-block .title-border.mobile {
+  font-size: 28px;
+}
 
 .gradient-part-one {
   position: absolute;
@@ -506,13 +521,24 @@ header a:hover {
   height: 70px;
   width: 200px;
 }
-
+.gradient-part-one.mobile {
+  height: 10vw;
+  width: 18vw;
+}
 .gradient-part-two {
   position: absolute;
   background: linear-gradient(to left, transparent, var(--main-background));
   color: transparent;
   height: 70px;
   width: 200px;
+}
+.gradient-part-one.mobile {
+  height: 10vw;
+  width: 18vw;
+}
+.gradient-part-two.mobile {
+  height: 10vw;
+  width: 18vw;
 }
 
 .portfolio-block .tag {
@@ -528,6 +554,9 @@ header a:hover {
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
+.portfolio-block .tag.mobile {
+  font-size: 15px;
+}
 
 .portfolio-block .tag:hover {
   background: #4824ff;
@@ -541,12 +570,30 @@ header a:hover {
   border: 1px solid #4824ff;
 }
 
+.filter-scrollbar {
+  margin-left: -5vw;
+  margin-right: -5vw;
+  padding-left: 5vw;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-scrollbar::-webkit-scrollbar {
+  height: 0px;
+}
+
 /* ---- REVIEW BLOCK ---- */
 .review-block {
   margin: 80px 0px;
   height: 580px;
   background: #4824ff;
   border-radius: 28px;
+}
+
+.review-block.mobile {
+  height: 168vw;
 }
 
 .review-block h1 {
@@ -563,6 +610,12 @@ header a:hover {
   font-size: 22px;
   line-height: 32px;
 }
+.review-block .description.mobile {
+  text-align: left;
+  margin: -4vw 7vw 7vw 7vw;
+  font-size: 4.7vw;
+  line-height: 6.5vw;
+}
 
 .review-block .selecting {
   background: white;
@@ -577,12 +630,22 @@ header a:hover {
   margin: auto;
   width: 1260px;
 }
+.review-carousel.mobile {
+  width: 100vw;
+  margin-left: -5vw;
+  margin-right: -5vw;
+}
 
 .review-container {
   display: flex;
   overflow-x: scroll;
   scroll-behavior: smooth;
   overflow: hidden;
+}
+
+.review-container.mobile {
+  width: 100vw;
+  margin: -8vw;
 }
 
 .next-button {
@@ -593,7 +656,10 @@ header a:hover {
   cursor: pointer;
   transition: 0.7s;
   align-content: center;
-  margin: 16px 0 0 10px;
+  margin: 1vw 0.2vw 1vw 0.2px;
+}
+.next-button.mobile {
+  scale: 0.9;
 }
 
 .next-button .array-next-icon {
@@ -615,6 +681,9 @@ header a:hover {
 .review-card {
   min-width: 420px;
 }
+.review-card.mobile {
+  min-width: 100vw;
+}
 
 .review-content {
   height: 230px;
@@ -622,6 +691,12 @@ header a:hover {
   background: white;
   border-radius: 24px;
   margin: 0 18px;
+}
+.review-content.mobile {
+  scale: 0.9;
+  width: 90vw;
+  height: 72vw;
+  margin: 5vw;
 }
 
 .review-block .review {
@@ -631,12 +706,16 @@ header a:hover {
   width: 90%;
   color: black;
 }
+.review-block .review.mobile {
+  font-size: 5.3vw;
+  line-height: 6.7vw;
+}
 
 .review-block .link {
   display: flex;
   position: right;
   height: 40px;
-  width: 80px;
+  width: 70px;
   background: black;
   border-radius: 24px;
   cursor: pointer;
@@ -675,7 +754,10 @@ header a:hover {
   height: 540px;
   font-size: 26px;
 }
-
+.guarantees-block.mobile {
+  height: 240vw;
+  font-size: 6vw;
+}
 .guarantees-points {
   list-style-type: none;
   padding-left: 20px;
@@ -684,6 +766,9 @@ header a:hover {
 .guarantees-points li {
   position: relative;
   padding-left: 60px;
+}
+.guarantees-points.mobile li {
+  padding-left: 8vw;
 }
 
 .guarantees-points li::before {
@@ -697,6 +782,10 @@ header a:hover {
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: -20px;
+}
+
+.guarantees-points.mobile li::before {
+  width: 9vw;
 }
 .point {
   margin-top: 35px;
@@ -751,4 +840,9 @@ header a:hover {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: url(/src/assets/icons/array.svg);
+}
+
+.btn-up.mobile::before {
+  width: 15vw;
+  height: 15vw;
 }

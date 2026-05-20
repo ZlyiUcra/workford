@@ -5,6 +5,9 @@
   margin-left: 5vw;
   margin-right: 5vw;
 }
+.image-gallery.mobile {
+  flex-direction: row;
+}
 
 .image-grid {
   display: flex;
@@ -13,12 +16,20 @@
   overflow: hidden;
 }
 
+.image-grid.mobile {
+  max-height: 200px;
+}
+
 .gallery-image {
   width: auto;
   height: 200px;
   border-radius: 16px;
   margin: 10px;
   cursor: pointer;
+}
+.gallery-image.mobile {
+  height: 175px;
+  margin: 3vw;
 }
 
 .show-more-button {

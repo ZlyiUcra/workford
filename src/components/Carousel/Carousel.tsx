@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./Carousel.css";
+import { useResize } from "../../hooks";
 
 const images = Object.values(
   import.meta.glob<string>("/src/assets/all/*.{png,jpg,jpeg,svg}", {
@@ -14,6 +15,8 @@ const Carousel = ({ direction }: { direction: "left" | "right" }) => {
   const requestIdRef = useRef<number | null>(null);
   const startPositionref = useRef(0);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const { isPortrait } = useResize();
 
   const closeModal = () => {
     setSelectedImage(null);
@@ -60,7 +63,7 @@ const Carousel = ({ direction }: { direction: "left" | "right" }) => {
             <img
               key={index}
               src={image}
-              className="carousel-image"
+              className={"carousel-image" + (isPortrait ? " mobile" : "")}
               onClick={() => setSelectedImage(image)}
             />
           ))}
@@ -68,7 +71,7 @@ const Carousel = ({ direction }: { direction: "left" | "right" }) => {
             <img
               key={index}
               src={image}
-              className="carousel-image"
+              className={"carousel-image" + (isPortrait ? " mobile" : "")}
               onClick={() => setSelectedImage(image)}
             />
           ))}

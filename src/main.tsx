@@ -525,15 +525,39 @@ function Main() {
         </p>
       </div>
       <div className="portfolio-block">
-        <div className="first-block">
-          <h1 className="main-title">Portfolio</h1>
-          <div style={{ position: "absolute", marginLeft: "-660px" }}>
-            <p className="gradient-part-one"></p>
-            <p className="title-border">Portf</p>
+        <div className={isPortrait ? "first-block" : "first-block mobile"}>
+          <h1 className={isPortrait ? "main-title" : "main-title mobile"}>
+            Portfolio
+          </h1>
+          <div
+            style={{
+              position: "absolute",
+              marginLeft: isPortrait ? "-660px" : "-75vw",
+            }}
+          >
+            <p
+              className={
+                isPortrait ? "gradient-part-one" : "gradient-part-one mobile"
+              }
+            ></p>
+            <p className={isPortrait ? "title-border" : "title-border mobile"}>
+              Port
+            </p>
           </div>
-          <div style={{ position: "absolute", marginLeft: "620px" }}>
-            <p className="gradient-part-two"></p>
-            <p className="title-border">Folio</p>
+          <div
+            style={{
+              position: "absolute",
+              marginLeft: isPortrait ? "620px" : "75vw",
+            }}
+          >
+            <p
+              className={
+                isPortrait ? "gradient-part-two" : "gradient-part-two mobile"
+              }
+            ></p>
+            <p className={isPortrait ? "title-border" : "title-border mobile"}>
+              folio
+            </p>
           </div>
           <img
             className="array-icon"
@@ -541,22 +565,26 @@ function Main() {
             draggable={false}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "20px",
-          }}
-        >
-          {(Object.keys(CATEGORY_LABELS) as Category[]).map((category) => (
-            <p
-              key={category}
-              className={`tag ${selectedCategory === category ? "selected" : ""}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {CATEGORY_LABELS[category]}
-            </p>
-          ))}
+
+        <div className={isPortrait ? "" : "filter-scrollbar"}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            {(Object.keys(CATEGORY_LABELS) as Category[]).map((category) => (
+              <p
+                key={category}
+                className={`tag ${selectedCategory === category ? "selected" : ""}
+                  ${isPortrait ? "" : "mobile"}`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {CATEGORY_LABELS[category]}
+              </p>
+            ))}
+          </div>
         </div>
 
         <div
@@ -567,40 +595,69 @@ function Main() {
         </div>
       </div>
 
-      <div className="review-block">
-        <h1>Feedback</h1>
-        <p className="description">
+      <div className={isPortrait ? "review-block" : "review-block mobile"}>
+        <h1 style={{ fontSize: isPortrait ? "50px" : "10vw" }}>Feedback</h1>
+        <p className={isPortrait ? "description" : "description mobile"}>
           Client reviews, written from their own
-          <span className="selecting"> personal accounts </span>
+          <span className="selecting"> personal accounts </span>
           on Telegram. Everything is transparent! <br /> Any review can be
-          <span className="selecting"> opened </span> in Telegram, and you can
-          <span className="selecting"> ask </span> about the experience of
+          <span className="selecting"> opened </span>in Telegram, and you can
+          <span className="selecting"> ask </span>about the experience of
           working with me <br />
           from the review's author directly.
         </p>
 
-        <div className="review-carousel">
-          <div className="review-container" ref={containerReviewRef}>
+        <div
+          className={isPortrait ? "review-carousel" : "review-carousel mobile"}
+        >
+          <div
+            className={
+              isPortrait ? "review-container" : "review-container mobile"
+            }
+            ref={containerReviewRef}
+          >
             {reviews.slice(-visibleReviews)}
             {reviews}
             {reviews.slice(0, visibleReviews)}
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div className="next-button" style={{ transform: "rotate(180deg)" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: isPortrait ? "20px" : "7vw",
+          }}
+        >
+          <div
+            className={isPortrait ? "next-button" : "next-button mobile"}
+            style={{ transform: "rotate(180deg)" }}
+          >
             <p className="array-next-icon" onClick={btnPrevReview} />
           </div>
-          <div className="next-button">
+          <div className={isPortrait ? "next-button" : "next-button mobile"}>
             <p className="array-next-icon" onClick={btnNextReview} />
           </div>
         </div>
       </div>
 
-      <div className="guarantees-block">
-        <h1 style={{ fontSize: "52px", paddingBottom: "20px" }}>GUARANTEES</h1>
+      <div
+        className={isPortrait ? "guarantees-block" : "guarantees-block mobile"}
+      >
+        <h1
+          style={{
+            fontSize: isPortrait ? "52px" : "10vw",
+            paddingBottom: isPortrait ? "20px" : "0",
+          }}
+        >
+          GUARANTEES
+        </h1>
 
-        <ol className="guarantees-points">
+        <ol
+          className={
+            isPortrait ? "guarantees-points" : "guarantees-points mobile"
+          }
+        >
           <li className="point">
             I accept payment through the
             <span style={{ color: "#4824ff" }}> Name* </span>
@@ -631,7 +688,7 @@ function Main() {
       </div>
       <div className="footer"> Workford </div>
       <button
-        className={scroll < 1960 ? "" : "btn-up"}
+        className={scroll < 1960 ? "" : isPortrait ? "btn-up" : "btn-up mobile"}
         onClick={upButton}
       ></button>
     </div>
